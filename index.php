@@ -6,10 +6,20 @@
  * 3. Déployez sur votre serveur et testez !
  */
 
-$from = '';
-$to = '';
-$message = 'Hello World, sending a simple mail !';
+$from = 'adresse1@mail.com';
+$to = 'adresse2@mail.com';
+// $message = 'Hello World, sending a simple mail !';
 // TODO Votre code ici.
+
+
+$headers = "From: adresse1@mail.com";
+/*
+if (mail($to, 'le sujet', $message, $headers)) {
+    echo "Email envoyé avec succès à $to ...";
+} else {
+    echo "Échec de l'envoi de l'email...";
+}
+*/
 
 
 /**
@@ -24,3 +34,14 @@ $message = 'Hello World, sending a simple mail !';
  *     N'écrasez pas les valeurs déjà existantes ( s'il y en a ).
  */
 // TODO Votre code ici.
+$message = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio esse facilis hic magni mollitia officia quasi quidem, rem sed velit. 
+Eligendi facilis ipsam nemo optio praesentium qui quidem repellendus vitae?";
+$message = wordwrap($message, 70, "\r\n");
+
+if (mail($to, 'le sujet', $message, $headers)) {
+    echo "Le message a bien été envoyé. Merci !";
+    file_put_contents("mail.txt", "$message, $to <br>");
+    echo file_get_contents("mail.txt");
+} else {
+    echo "Une erreur est survenue lors de l'envoi du mail";
+}
